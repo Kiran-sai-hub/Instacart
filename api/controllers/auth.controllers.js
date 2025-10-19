@@ -153,6 +153,14 @@ const refreshToken = async (req, res) => {
   }
 };
 
-const getProfile = async (req, res) => {};
+const getProfile = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(`Error in getProfile controller: ${error.message}`);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 export { signup, logout, login, refreshToken, getProfile };
